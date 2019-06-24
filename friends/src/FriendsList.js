@@ -1,18 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const FriendsList = (props) => {
   return (
     <div className='friends-list-wrapper'>
+    
       {props.friends.map(friend => {
         return (
          <div className='friends-card' friend={friend} key={friend.id}> 
-           <h2>{friend.name}</h2>
-           <p>Age: {friend.age}</p>
-           <p>Email: {friend.email}</p>
+           <Link to={`/friend-info/${friend.id}`}>
+             <h2>{friend.name}</h2>
+           </Link> 
          </div>
-        )
-      })}
-      
+         )
+       })}
+     
       <form >
          <input
             type="text"

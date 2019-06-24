@@ -5,6 +5,7 @@ import './App.css';
 
 import Home from './Home';
 import FriendsList from './FriendsList';
+import Friend from './Friend';
 
 class App extends React.Component {
   constructor(props) {
@@ -44,8 +45,12 @@ class App extends React.Component {
        </ul>
        <Route exact path='/' component={Home} />
        <Route 
-         path="/friends" 
+         exact path="/friends" 
          render={props => <FriendsList {...props} friends={friends} />}
+       />
+       <Route 
+         path="/friend-info/:id" 
+         render={props =>  <Friend {...props} friends={friends} />}
        />
      </div>
    );
