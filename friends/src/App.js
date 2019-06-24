@@ -1,11 +1,14 @@
 import React from 'react';
-import './App.css';
 import axios from 'axios';
+import { Route, NavLink } from 'react-router-dom';
+import './App.css';
+
+import Home from './Home';
 import FriendsList from './FriendsList';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state={
       friends: []
     }
@@ -22,46 +25,31 @@ class App extends React.Component {
     .then()
     .catch(err => {
       // console.log(err)
-      this.setState({ error: err.response.message });
+      this.setState({ error: err.response});
     })
   }
 
 
   render() {
+     const { friends } = this.state;
     return (
-      <div className="App">
-     
-         {this.state.friends.map(friend => {
-           return <FriendsList friend={friend} key={friend.id}/>
-         })}
-        
-         <form onSubmit={this.submitHandler}>
-         <input
-            type="text"
-            value={this.state.name}
-            onChange={this.changeHandler}
-            placeholder="Name"
-            name="name"
-          />
-          <input
-            type="text"
-            value={this.state.age}
-            onChange={this.changeHandler}
-            placeholder="Age"
-            name="age"
-          />
-          <input
-            type="text"
-            value={this.state.email}
-            onChange={this.changeHandler}
-            placeholder="Email"
-            name="email"
-          />
-          <button type="submit">Add Friend</button>
-         </form>
-      </div>
-    );
+     <div className="App">
+        <ul className='navbar'>
+         <li><NavLink exact to='/' activeClassName='activeButton'>Home
+           </NavLink>
+         </li>
+         <li>
+         <NavLink to='/friends' activeClassName='activeButton'>Friends List</NavLink>
+         </li>
+       </ul>
+       <Route exact path='/' component={Home} />
+       <Route 
+         path="/friends" 
+         render={props => <FriendsList {...props} friends={friends} />}
+       />
+     </div>
+   );
   }
-}
+ }
 
 export default App;
