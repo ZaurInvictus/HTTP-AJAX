@@ -7,6 +7,7 @@ import Home from './Home';
 import FriendsList from './FriendsList';
 import Friend from './Friend';
 import PostFriend from './PostFriend'
+import UpdateDelete from './UpdateDelete'
 
 class App extends React.Component {
   constructor(props) {
@@ -49,12 +50,17 @@ class App extends React.Component {
          exact path="/friends" 
          render={props => <FriendsList {...props} friends={friends} />}
        />
-       <Route path="/friend-info/:id" 
-       render={props => <Friend {...props} friends={friends} />}
+       <Route path="/friends/:id" 
+        render={props => <Friend {...props} friends={friends} />}
        />
        <Route 
-       exact path='/add-friend' 
-       render={props => <PostFriend {...props}  updateFriends={this.updateFriends} />}
+        exact path='/add-friend' 
+        render={props => <PostFriend {...props}  updateFriends={this.updateFriends} />}
+       />
+       <Route 
+        exact path="/edit/:id"
+        render={props => <UpdateDelete {...props}
+        updateFriends={this.updateFriends}/>}
        />
      </div>
    );

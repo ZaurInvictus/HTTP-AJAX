@@ -9,7 +9,7 @@ const FriendsList = (props) => {
         {props.friends.map(friend => {
           return (
            <div className='friends-card' friend={friend} key={friend.id}> 
-             <Link to={`/friend-info/${friend.id}`}>
+             <Link to={`/friends/${friend.id}`}>
                <h2>{friend.name}</h2>
              </Link> 
            </div>

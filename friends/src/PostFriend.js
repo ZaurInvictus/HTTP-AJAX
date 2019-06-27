@@ -31,7 +31,7 @@ class PostFriend extends React.Component {
 				//PASS STATE UP TO APP.jS
        this.props.updateFriends(response.data)
        	//PUSH BACK TO FRIENDS PAGE
-       this.props.push('/friends')
+       this.props.history.push('/friends')
      })
      .catch((err) => {
         this.setState({
