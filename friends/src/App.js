@@ -14,6 +14,7 @@ class App extends React.Component {
     super(props);
     this.state={
       friends: [],
+      errorMessage: null
     }
   }
 
@@ -26,8 +27,8 @@ class App extends React.Component {
       this.setState({ friends: res.data });
     })
     .catch(err => {
-      console.log(err)
-      this.setState({ error: err.response});
+      //console.log(err)
+      this.setState({ errorMessage: err.response.data.error});
     })
   }
 

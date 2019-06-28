@@ -9,22 +9,29 @@ class UpdateDelete extends React.Component {
     errorMessage: null
   }
 
-  //SERVER NEED TO BE UPDATED TO MAKE THIS CODE WORK
-// componentDidMount() {
-//   const id = this.props.match.params.id
+//POPULATION THE FORM WITH THE CURRENT DATA
+componentDidMount() {
+  const id = Number(this.props.match.params.id)
   
-//   axios.get(`http://localhost:5000/friends/${id}`)
-//   .then(response => {
-//     const{ name, age, email } = response.data
-//     console.log(response.data)
-//     this.setState({ name, age, email })
-//   })
-//   .catch(err => {
-//     this.setState({
-//       errorMessage: err.response.data.error
-//     })
-//   })
-// } 
+  axios.get(`http://localhost:5000/friends`)
+  .then(response => {
+    //console.log(response.data)
+    const foundFriend = response.data.filter(friend => {
+      if(friend.id === id) {
+          return friend
+      } else  {
+        return null
+      }
+    })
+    const{ name, age, email } = foundFriend[0]
+    this.setState({ name, age, email})
+  })
+  .catch(err => {
+    this.setState({
+      errorMessage: err.response.data.error
+    })
+  })
+} 
 
 
 handleChange = e => {
@@ -48,6 +55,7 @@ updateFriend= e => {
        this.props.updateFriends(response.data)
        this.props.history.push('/friends')
       })
+       
       .catch(err => {
         this.setState({
           errorMessage: err.response.data.error

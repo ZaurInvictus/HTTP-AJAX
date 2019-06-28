@@ -18,7 +18,6 @@ class PostFriend extends React.Component {
 
   addFriend = e => {
     e.preventDefault()
-
     const{ name, age, email } = this.state
     const payload = { name, age, email }
 
@@ -27,7 +26,6 @@ class PostFriend extends React.Component {
        this.setState({
          errorMessage: null
        })
-
 				//PASS STATE UP TO APP.jS
        this.props.updateFriends(response.data)
        	//PUSH BACK TO FRIENDS PAGE
@@ -38,8 +36,7 @@ class PostFriend extends React.Component {
           errorMessage: err.response
         })
      })
-
-  }
+   }
 
 
  render() {
